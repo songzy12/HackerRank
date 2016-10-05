@@ -21,3 +21,8 @@ int main() {
     }
     return 0;
 }
+
+/* Just check whether gcd(x, y) == gcd(z, w).
+ * consider the execution of Eclidean Algorithm.
+ * (x, y) -> (d, 0) -> (z, w)
+ */
