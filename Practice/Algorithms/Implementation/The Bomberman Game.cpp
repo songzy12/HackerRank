@@ -29,6 +29,7 @@ int main() {
                     if (ii >= 0 && ii < R && jj >= 0 && jj < C
                         && state[ii][jj] != 1)
                         state[ii][jj] = 2;
+                        // we use a different number to modify the state simultinously.
                 }
             }
             
