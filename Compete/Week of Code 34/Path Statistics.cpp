@@ -1,4 +1,5 @@
-// MO's algorithm
+// MO's algorithm (smart square root decomposition)
+// All the queries are first ordered in ascending order of their block number (block number is the block in which its opening falls). Ties are ordered in ascending order of their R value.
 
 // there are at most \sqrt{N} distinct frequencies 
 
