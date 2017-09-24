@@ -22,7 +22,7 @@ namespace SuffixArray
         }
         for (int i = 1; i < ALPHABET; ++i)
         {
-            cnt[i] += cnt[i-1];
+            cnt[i] += cnt[i-1]; // now cnt[i] is the rank of i
         }
         for (int i = 0; i < n; ++i)
         {
@@ -37,10 +37,11 @@ namespace SuffixArray
                 ++count;
             c[p[i]] = count - 1; 
             // count is rank
-            // the rank of p[i] is count - 1
+            // c[p[i]] = j means the rank of p[i] is j
         }
         for (int h = 0; (1<<h) < n; ++h)
         {
+            // each loop, we update c[] as cn[]
             for (int i = 0; i < n; ++i)
             {
                 pn[i] = p[i] - (1<<h);
@@ -86,10 +87,12 @@ namespace SuffixArray
         return res;
     }
 }
+
 string solve(string& a, string& b)
 {
     a.push_back('a');
     b.push_back('b');
+    // why this push_back?
     string s = a+b;
     vector<int> suffixArray = SuffixArray::getSuffixArray(s);
     string res = "";
