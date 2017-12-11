@@ -19,7 +19,14 @@ typedef pair<int, int> ii;
 typedef pair<int, ii> iii;
 
 ll pwr(ll base, ll p, ll mod = MOD){
-ll ans = 1;while(p){if(p&1)ans=(ans*base)%mod;base=(base*base)%mod;p/=2;}return ans;
+    ll ans = 1;
+    while(p){
+        if(p&1)
+            ans=(ans*base)%mod;
+        base=(base*base)%mod;
+        p/=2;
+    }
+    return ans;
 }
 
 
@@ -103,7 +110,7 @@ int next_state(int v, int dir){
 }
 
 
-void dfs(int v){
+void dfs(int v) {
     lo[v] = ++ticks;
     for(int i=0;i<(int)adj[v].size();i++){
         dfs(adj[v][i]);
@@ -115,6 +122,7 @@ void dfs(int v){
 ll BIT[MAXSIZE];
 
 void update(int idx, ll val){
+    // binary indexed tree
     while(idx <= ticks){
         BIT[idx] += val;
         idx += idx & (-idx);
