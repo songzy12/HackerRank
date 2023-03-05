@@ -6,7 +6,7 @@ for t in range(T):
     # the final position would be n - 1, 0, n - 2, 1, ...
     head = K
     tail = N - 1 - K
-    if head < tail: # note the order
-        print (2*head + 1)
+    if head < tail:  # note the order
+        print(2 * head + 1)
     else:
-        print (2*tail)
+        print(2 * tail)

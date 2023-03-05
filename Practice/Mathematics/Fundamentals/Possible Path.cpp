@@ -7,17 +7,19 @@
 #include <cstdio>
 #include <vector>
 #include <iostream>
+#include <numeric>
 #include <algorithm>
-using namespace std;
 
-int main() {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+int main()
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     int t;
-    cin>>t;
-    while (t--) {
+    std::cin >> t;
+    while (t--)
+    {
         int x, y, w, z;
-        cin>>x>>y>>w>>z;
-        cout<<(__gcd(x,y) == __gcd(w,z) ? "YES" : "NO")<<endl;
+        std::cin >> x >> y >> w >> z;
+        std::cout << (std::gcd(x, y) == std::gcd(w, z) ? "YES" : "NO") << std::endl;
     }
     return 0;
 }
