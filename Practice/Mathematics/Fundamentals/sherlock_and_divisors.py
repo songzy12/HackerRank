@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/sherlock-and-divisors/
+
 T = int(input())
 for t in range(T):
     n = int(input())

@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/restaurant/
+
 T = int(input())
 for t in range(T):
     m, n = map(int, input().split())

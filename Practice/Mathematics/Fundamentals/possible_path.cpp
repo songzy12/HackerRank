@@ -1,7 +1,4 @@
-/* Adam正站在一个无限大的二维网格的(a,b)点。他想知道他能否到达(x,y)点。他唯一可做的操作是从某个点 (a,b)，移动到(a+b,b), (a,a+b), (a-b,b), 或者 (a,a-b) 。 他允许到二维网格的任何点，点的 X(或者 Y)坐标可以为正、负，0。
- *
- * 告诉Adam它能否到达(x,y)点
- */
+// https://www.hackerrank.com/challenges/possible-path/
 
 #include <cmath>
 #include <cstdio>

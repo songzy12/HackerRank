@@ -1,4 +1,4 @@
-# cannot figure out the math here
+# https://www.hackerrank.com/challenges/special-multiple/
 
 
 def solve(N):

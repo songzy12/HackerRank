@@ -1,4 +1,4 @@
-#!/bin/python3
+# https://www.hackerrank.com/challenges/p1-paper-cutting/
 
 
 def solve(n, m):

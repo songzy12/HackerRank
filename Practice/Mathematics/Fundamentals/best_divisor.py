@@ -1,4 +1,4 @@
-#!/bin/python3
+# https://www.hackerrank.com/challenges/best-divisor/
 
 n = int(input().strip())
 cur = 0

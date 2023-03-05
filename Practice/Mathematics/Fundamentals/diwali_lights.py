@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/diwali-lights/
+
 T = int(input())
 
 

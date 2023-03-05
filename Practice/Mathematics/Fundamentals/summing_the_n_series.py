@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/summing-the-n-series/
+
 T = int(input())
 for t in range(T):
     n = int(input())

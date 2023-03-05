@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/sherlock-and-permutations/
+
 from math import factorial
 
 n = int(input())
