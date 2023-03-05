@@ -2,6 +2,7 @@
 
 import sys
 
+
 def isValid(s):
     # Complete this function
     from collections import Counter
@@ -14,11 +15,10 @@ def isValid(s):
     a, b = sorted(c.keys())
     if b - a == 1 and c[b] == 1:
         return True
-    if a == 1 and c[a] == 1: # another case
+    if a == 1 and c[a] == 1:  # another case
         return True
     return False
-           
-    
+
 
 s = raw_input().strip()
 result = isValid(s)

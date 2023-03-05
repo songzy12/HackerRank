@@ -1,5 +1,6 @@
 def char2index(c):
-    return ord(c)-ord('a')
+    return ord(c) - ord('a')
+
 
 num = 26
 
@@ -28,11 +29,11 @@ for c in s:
             chars[i][col] = c
             counts[i][col] = 1
         elif chars[i][col] == c or counts[i][col] == -1:
-            counts[i][col] = -1 # stupid
+            counts[i][col] = -1  # stupid
         else:
             chars[i][col] = c
             counts[i][col] += 1
 
 ans = max([max(row) for row in counts])
 # alternating
-print ans if ans > 1 else 0 
+print ans if ans > 1 else 0

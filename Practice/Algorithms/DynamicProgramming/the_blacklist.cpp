@@ -13,13 +13,14 @@ const int maxn = 20;
 const int maxk = 10;
 int cost[maxk][maxn];
 
-int main() {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */   
+int main()
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     int n, k;
-    cin>>n>>k;
+    cin >> n >> k;
     for (int i = 0; i < k; ++i)
         for (int j = 0; j < n; ++j)
-            cin>>cost[i][j];
+            cin >> cost[i][j];
     // select zero or one consecutive section from each line.
     return 0;
 }

@@ -8,15 +8,16 @@
      Node *prev;
    }
 */
-Node* Reverse(Node* head)
+Node *Reverse(Node *head)
 {
     // Complete this function
-    // Do not write the main method. 
+    // Do not write the main method.
     if (head == nullptr)
         return head;
-    Node * prev = nullptr;
-    while (head) {
-        Node * next = head->next;
+    Node *prev = nullptr;
+    while (head)
+    {
+        Node *next = head->next;
         head->next = prev;
         head->prev = next;
         prev = head;

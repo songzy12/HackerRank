@@ -175,7 +175,7 @@ void searchWords(string arr[], int k, string text)
 			if (out[currentState] & (1 << j))
 			{
 				cout << "Word " << arr[j] << " appears from "
-					<< i - arr[j].size() + 1 << " to " << i << endl;
+					 << i - arr[j].size() + 1 << " to " << i << endl;
 			}
 		}
 	}
@@ -186,7 +186,7 @@ int main()
 {
 	string arr[] = {"he", "she", "hers", "his"};
 	string text = "ahishers";
-	int k = sizeof(arr)/sizeof(arr[0]);
+	int k = sizeof(arr) / sizeof(arr[0]);
 
 	searchWords(arr, k, text);
 

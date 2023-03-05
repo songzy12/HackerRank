@@ -1,4 +1,4 @@
-//Author Vitalii
+// Author Vitalii
 #include <iostream>
 #include <vector>
 #include <algorithm>
@@ -12,7 +12,7 @@ namespace SuffixArray
     const int ALPHABET = 128;
     int p[MAXSIZE], c[MAXSIZE], cnt[MAXSIZE];
     int pn[MAXSIZE], cn[MAXSIZE];
-    vector<int> getSuffixArray(string& s)
+    vector<int> getSuffixArray(string &s)
     {
         FILL(cnt, 0);
         int n = s.size();
@@ -22,54 +22,54 @@ namespace SuffixArray
         }
         for (int i = 1; i < ALPHABET; ++i)
         {
-            cnt[i] += cnt[i-1]; // now cnt[i] is the rank of i
+            cnt[i] += cnt[i - 1]; // now cnt[i] is the rank of i
         }
         for (int i = 0; i < n; ++i)
         {
-            p[--cnt[s[i]]] = i; 
+            p[--cnt[s[i]]] = i;
             // p[j] = i means rank j is s[i]
         }
         int count = 1;
-        c[p[0]] = count-1;
+        c[p[0]] = count - 1;
         for (int i = 1; i < n; ++i)
         {
-            if (s[p[i]] != s[p[i-1]])
+            if (s[p[i]] != s[p[i - 1]])
                 ++count;
-            c[p[i]] = count - 1; 
+            c[p[i]] = count - 1;
             // count is rank
             // c[p[i]] = j means the rank of p[i] is j
         }
-        for (int h = 0; (1<<h) < n; ++h)
+        for (int h = 0; (1 << h) < n; ++h)
         {
             // each loop, we update c[] as cn[]
             for (int i = 0; i < n; ++i)
             {
-                pn[i] = p[i] - (1<<h);
+                pn[i] = p[i] - (1 << h);
                 if (pn[i] < 0)
                     pn[i] += n;
             }
-    
+
             FILL(cnt, 0);
-    
+
             for (int i = 0; i < n; ++i)
             {
                 ++cnt[c[i]];
             }
             for (int i = 1; i < count; ++i)
             {
-                cnt[i] += cnt[i-1];
+                cnt[i] += cnt[i - 1];
             }
-            for (int i = n-1; i >= 0; --i)
+            for (int i = n - 1; i >= 0; --i)
             {
                 p[--cnt[c[pn[i]]]] = pn[i];
             }
             count = 1;
-            cn[p[0]] = count-1;
+            cn[p[0]] = count - 1;
             for (int i = 1; i < n; ++i)
             {
-                int pos1 = (p[i] + (1<<h))%n;
-                int pos2 = (p[i-1] + (1<<h))%n;
-                if (c[p[i]] != c[p[i-1]] || c[pos1] != c[pos2])
+                int pos1 = (p[i] + (1 << h)) % n;
+                int pos2 = (p[i - 1] + (1 << h)) % n;
+                if (c[p[i]] != c[p[i - 1]] || c[pos1] != c[pos2])
                     ++count;
                 cn[p[i]] = count - 1;
             }
@@ -88,27 +88,27 @@ namespace SuffixArray
     }
 }
 
-string solve(string& a, string& b)
+string solve(string &a, string &b)
 {
     a.push_back('a');
     b.push_back('b');
     // why this push_back?
-    string s = a+b;
+    string s = a + b;
     vector<int> suffixArray = SuffixArray::getSuffixArray(s);
     string res = "";
-    int pos1=0, pos2=0;
+    int pos1 = 0, pos2 = 0;
     while (true)
     {
-        if (pos1 >= (a.size()-1) && pos2 >= (b.size()-1))
+        if (pos1 >= (a.size() - 1) && pos2 >= (b.size() - 1))
         {
             break;
         }
-        if (pos1 >= (a.size()-1))
+        if (pos1 >= (a.size() - 1))
         {
             res += b[pos2++];
             continue;
         }
-        if (pos2 >= (b.size()-1))
+        if (pos2 >= (b.size() - 1))
         {
             res += a[pos1++];
             continue;
@@ -127,9 +127,9 @@ int main()
     cin >> T;
     for (int t = 0; t < T; ++t)
     {
-        string a,b;
+        string a, b;
         cin >> a >> b;
-        cout << solve(a,b) << endl;
+        cout << solve(a, b) << endl;
     }
     return 0;
 }

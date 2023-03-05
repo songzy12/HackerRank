@@ -6,26 +6,29 @@
 #include <cstdio>
 using namespace std;
 
-
-int main() {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+int main()
+{
+    /* Enter your code here. Read input from STDIN. Print output to STDOUT */
     int T;
-    cin>>T;
-    while (T--) {
+    cin >> T;
+    while (T--)
+    {
         unsigned long long N;
-        cin>>N;
+        cin >> N;
         int count = 0;
-        while ((N & 0x1) == 0) {
-            count ++;
+        while ((N & 0x1) == 0)
+        {
+            count++;
             N >>= 1;
         }
         N >>= 1;
-        while (N) {
+        while (N)
+        {
             if ((N & 0x1L) == 1)
-                count ++;
+                count++;
             N >>= 1;
         }
-        cout<<(count % 2 ? "Louise" : "Richard")<<endl;
+        cout << (count % 2 ? "Louise" : "Richard") << endl;
     }
     return 0;
 }
