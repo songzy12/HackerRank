@@ -10,7 +10,7 @@ length = 50
 ans = []
 cur = 0
 carry = 0
-for i in range(length-1, -1, -1):
+for i in range(length - 1, -1, -1):
     cur = carry
     for j in range(N):
         cur += int(nums[j][i])
@@ -24,6 +24,4 @@ while carry:
     ans.append(carry % 10)
     carry //= 10
 
-print (''.join(map(str, ans[-10:][::-1])))
-    
-    
+print(''.join(map(str, ans[-10:][::-1])))

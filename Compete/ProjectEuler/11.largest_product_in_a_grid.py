@@ -4,6 +4,8 @@ grid = []
 for grid_i in range(20):
     grid_t = [int(grid_temp) for grid_temp in input().strip().split(' ')]
     grid.append(grid_t)
+
+
 def solve_line(nums):
     #print(nums)
     head = 0
@@ -18,7 +20,7 @@ def solve_line(nums):
             cur_prod *= nums[tail]
         else:
             cur_prod *= nums[tail]
-            
+
             # print(head, tail, cur_prod, ans)
             if cur_prod > ans:
                 ans = cur_prod
@@ -26,6 +28,7 @@ def solve_line(nums):
             head += 1
         tail += 1
     return ans
+
 
 def solve():
     ans = 0
@@ -41,16 +44,16 @@ def solve():
         line = []
         k = 0
         while i + k < 20 and k < 20:
-            line.append(grid[i+k][k])
+            line.append(grid[i + k][k])
             k += 1
         temp = solve_line(line)
         ans = max(ans, temp)
-        
+
     for j in range(1, 20):
         line = []
         k = 0
         while k < 20 and j + k < 20:
-            line.append(grid[k][j+k])
+            line.append(grid[k][j + k])
             k += 1
         temp = solve_line(line)
         ans = max(ans, temp)
@@ -61,7 +64,7 @@ def solve():
         line = []
         k = 0
         while i - k >= 0 and k < 20:
-            line.append(grid[i-k][k])
+            line.append(grid[i - k][k])
             k += 1
         temp = solve_line(line)
         ans = max(ans, temp)
@@ -69,13 +72,16 @@ def solve():
     for j in range(1, 20):
         line = []
         k = 0
-        while 19-k >=0 and j + k < 20:
-            line.append(grid[19-k][j+k]) # NOTE: here is how to compute the diagonal line
+        while 19 - k >= 0 and j + k < 20:
+            line.append(
+                grid[19 -
+                     k][j +
+                        k])  # NOTE: here is how to compute the diagonal line
             k += 1
         temp = solve_line(line)
         ans = max(ans, temp)
-    
+
     return ans
-    
-   
+
+
 print(solve())

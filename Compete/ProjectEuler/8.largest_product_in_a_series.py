@@ -12,9 +12,9 @@ for t in range(T):
         while tail < n:
             cur_num = int(num[tail])
             # print(head, tail, cur_num, cur_prod)
-            if cur_num == 0:                
+            if cur_num == 0:
                 cur_prod = 1
-                head = tail + 1 # NOTE: care for the order and modification
+                head = tail + 1  # NOTE: care for the order and modification
             elif tail - head + 1 < k:
                 cur_prod *= cur_num
             else:
@@ -25,5 +25,5 @@ for t in range(T):
                 head += 1
             tail += 1
         return ans
-    
+
     print(solve(num, n, k))
