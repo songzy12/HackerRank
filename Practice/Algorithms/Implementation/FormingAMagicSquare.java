@@ -1,10 +1,6 @@
-import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
 
-public class Solution {
+public class FormingAMagicSquare {
 
 	public static int[] generate(int x, int y) {
 		return new int[] { x, 15 - x - y, y, 5 + y - x, 5, 5 + x - y, 10 - y, x + y - 5, 10 - x };

@@ -1,11 +1,6 @@
-import java.io.*;
 import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
-import java.util.stream.Stream;
 
-public class Solution {
+public class ClimbingTheLeaderboard {
 
     public static Integer[] unique(Integer[] scores) {
         ArrayList<Integer> ans = new ArrayList<Integer>();
