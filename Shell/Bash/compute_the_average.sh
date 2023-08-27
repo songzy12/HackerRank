@@ -1,7 +1,7 @@
 read N
 sum=0
 
-for ((i = 0; i < $N; i++)); do
+for i in $(seq 1 $N); do
     read x
     sum=$(($sum + $x))
 done
