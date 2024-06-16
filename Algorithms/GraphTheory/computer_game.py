@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/computer-game/problem?isFullScreen=true
+#
 # There are two random arrays A & B, each having the same number of elements.
 # The game begins with Sophia removing a pair (Ai, Bj) from the array if they are not co-prime.
 # Sophia wants to find out the maximal number of times(S) she can do this on the arrays.
@@ -11,6 +13,7 @@ sys.stdin = open('in_.txt', 'r')
 n = int(input())
 A = list(map(int, input().split()))
 B = list(map(int, input().split()))
+
 #print(A, B)
 
 
