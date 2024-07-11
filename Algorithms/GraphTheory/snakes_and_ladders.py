@@ -4,6 +4,13 @@
 #   export OUTPUT_PATH=/tmp/output.txt
 #   python3 snakes_and_ladders.py < in.txt
 #   cat $OUTPUT_PATH
+#
+# Build a directed graph with 3 kinds of edges:
+# 1. for each node n, 6 edges that points to n+1, n+2, ..., n+6
+# 2. for each snake, ...
+# 3. for each ladder, ...
+# Then, run shortest path algorithm on the built graph.
+
 import math
 import os
 import random
