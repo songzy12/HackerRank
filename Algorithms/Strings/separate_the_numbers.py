@@ -1,6 +1,4 @@
-#!/bin/python
-
-import sys
+# https://www.hackerrank.com/challenges/separate-the-numbers/problem?isFullScreen=true
 
 
 def check(s, num):
@@ -24,5 +22,4 @@ def check_(s):
 q = int(raw_input().strip())
 for a0 in xrange(q):
     s = raw_input().strip()
-    # your code goes here
-    print ' '.join(check_(s))
+    print(' '.join(check_(s)))

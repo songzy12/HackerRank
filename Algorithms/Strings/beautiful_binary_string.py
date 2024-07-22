@@ -1,6 +1,4 @@
-#!/bin/python
-
-import sys
+# https://www.hackerrank.com/challenges/beautiful-binary-string/problem?isFullScreen=true
 
 
 def minSteps(n, B):

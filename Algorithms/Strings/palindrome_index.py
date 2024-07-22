@@ -1,10 +1,7 @@
-#!/bin/python
-
-import sys
+# https://www.hackerrank.com/challenges/palindrome-index?isFullScreen=true
 
 
 def palindromeIndex(s):
-    # Complete this function
     i = 0
     j = len(s) - 1
     while i < j and s[i] == s[j]:

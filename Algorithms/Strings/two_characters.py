@@ -1,3 +1,6 @@
+# https://www.hackerrank.com/challenges/two-characters/problem?isFullScreen=true
+
+
 def char2index(c):
     return ord(c) - ord('a')
 
@@ -36,4 +39,4 @@ for c in s:
 
 ans = max([max(row) for row in counts])
 # alternating
-print ans if ans > 1 else 0
+print(ans if ans > 1 else 0)

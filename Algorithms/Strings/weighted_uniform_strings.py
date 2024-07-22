@@ -1,6 +1,4 @@
-#!/bin/python
-
-import sys
+# https://www.hackerrank.com/challenges/weighted-uniform-string/problem?isFullScreen=true
 
 s = raw_input().strip()
 from collections import defaultdict
@@ -23,7 +21,6 @@ n = int(raw_input().strip())
 for a0 in xrange(n):
     x = int(raw_input().strip())
 
-    # your code goes here
     def check():
         for i, t in c.items():
             num = ord(i) - ord('a') + 1
@@ -31,4 +28,4 @@ for a0 in xrange(n):
                 return True
         return False
 
-    print "Yes" if check() else "No"
+    print("Yes" if check() else "No")

@@ -1,11 +1,7 @@
-#!/bin/python
-
-import sys
+# https://www.hackerrank.com/challenges/common-child/problem?isFullScreen=true
 
 
 def commonChild(s1, s2):
-    # Complete this function
-
     # dp = [[0 for i in range(len(s2)+1)] for j in range(len(s1)+1)]
 
     if len(s1) < len(s2):  # make sure len(s2) is smaller

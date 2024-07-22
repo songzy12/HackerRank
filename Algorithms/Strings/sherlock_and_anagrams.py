@@ -1,10 +1,7 @@
-#!/bin/python
-
-import sys
+# https://www.hackerrank.com/challenges/sherlock-and-anagrams/problem?isFullScreen=true
 
 
 def sherlockAndAnagrams(s):
-    # Complete this function
     ans = 0
     from collections import defaultdict
     for step in range(1, len(s)):

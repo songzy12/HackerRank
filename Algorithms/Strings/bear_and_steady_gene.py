@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/bear-and-steady-gene/problem?isFullScreen=true
+
 n = int(raw_input())
 s = raw_input()
 
@@ -62,4 +64,4 @@ def get_ans():
     return ans
 
 
-print get_ans()
+print(get_ans())

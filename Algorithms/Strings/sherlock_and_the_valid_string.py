@@ -1,10 +1,7 @@
-#!/bin/python
-
-import sys
+# https://www.hackerrank.com/challenges/sherlock-and-valid-string/problem?isFullScreen=true
 
 
 def isValid(s):
-    # Complete this function
     from collections import Counter
     c = Counter(s)
     c = Counter(c.values())

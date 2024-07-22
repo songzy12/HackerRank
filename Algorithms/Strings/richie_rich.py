@@ -1,10 +1,7 @@
-#!/bin/python
-
-import sys
+# https://www.hackerrank.com/challenges/richie-rich/problem?isFullScreen=true
 
 
 def richieRich(s, n, k):
-    # Complete this function
     i = 0
     j = len(s) - 1
     s = list(s)
