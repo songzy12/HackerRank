@@ -60,7 +60,7 @@ def combinator(side_counts):
 def compute(mid_count, side_counts):
     result = combinator(side_counts)
     if mid_count > 0:
-        return mid_count * result
+        return mid_count * result % MOD
     return result
 
 
