@@ -2,7 +2,8 @@
 #
 # We can first count the number of each char. Then:
 # 1. if all chars appear for the same time, then the string is valid
-# 2. if not, since we can only remove one char, which means we can only decrease the count of one char by 1, so we require there are at most two different counts:
+# 2. if not, since we can only remove one char, which means we can only decrease the count of one char by 1, 
+#    so we require there are at most two different counts:
 #    a. we decrease the large one and the string becomes valid. The large count is 1 larger than the small count.
 #    b. we decrease the small one and the string becomes valid. The small count is 1.
 

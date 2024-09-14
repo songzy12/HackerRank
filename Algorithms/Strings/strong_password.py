@@ -13,6 +13,10 @@ def minimumNumber(unused, password):
                 return 0
         return 1
 
-    res = needsOne(password, numbers) + needsOne(password, lower_case) + \
-         needsOne(password, upper_case) + needsOne(password, special_characters)
+    res = (
+        needsOne(password, numbers)
+        + needsOne(password, lower_case)
+        + needsOne(password, upper_case)
+        + needsOne(password, special_characters)
+    )
     return max(res, 6 - len(password))

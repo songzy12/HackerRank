@@ -1,7 +1,9 @@
 # https://www.hackerrank.com/challenges/hackerrank-in-a-string?isFullScreen=true
 
 
-def check(s, p):
+def hackerrankInString(s):
+    p = "hackerrank"
+
     i = 0
     j = 0
     while i < len(p):
@@ -10,11 +12,6 @@ def check(s, p):
         if j == len(s):
             break
         i += 1
-        j += 1  # for repeated 'r'
-    return i == len(p)
+        j += 1
 
-
-q = int(raw_input().strip())
-for a0 in xrange(q):
-    s = raw_input().strip()
-    print('YES' if check(s, 'hackerrank') else 'NO')
+    return "YES" if i == len(p) else "NO"
