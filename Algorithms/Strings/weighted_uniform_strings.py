@@ -1,31 +1,33 @@
 # https://www.hackerrank.com/challenges/weighted-uniform-string/problem?isFullScreen=true
 
-s = raw_input().strip()
-from collections import defaultdict
+import string
 
-# substring not subsequence
 
-c = defaultdict(int)
-count = 0
-for i in range(len(s)):
-    if i == 0 or s[i] != s[i - 1]:
-        if i != 0:
-            c[s[i - 1]] = max(count, c[s[i - 1]])
-        count = 1
-    else:
-        count += 1
+def compute_weights(s):
+    weights_map = {c: ord(c) - ord("a") + 1 for c in string.ascii_lowercase}
 
-c[s[-1]] = max(count, c[s[-1]])
+    weights = set()
+    i = 0
+    last_char = ""
+    cur_length = 1
+    while i < len(s):
+        if i == 0 or s[i] != s[i - 1]:
+            last_char = s[i]
+            cur_length = 1
+        else:
+            cur_length += 1
+        weights.add(weights_map[s[i]] * cur_length)
+        i += 1
 
-n = int(raw_input().strip())
-for a0 in xrange(n):
-    x = int(raw_input().strip())
+    return weights
 
-    def check():
-        for i, t in c.items():
-            num = ord(i) - ord('a') + 1
-            if x % num == 0 and x / num <= t:
-                return True
-        return False
 
-    print("Yes" if check() else "No")
+def weightedUniformStrings(s, queries):
+    weights = compute_weights(s)
+    results = []
+    for query in queries:
+        if query in weights:
+            results.append("Yes")
+        else:
+            results.append("No")
+    return results
