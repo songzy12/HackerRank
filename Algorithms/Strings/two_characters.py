@@ -1,42 +1,30 @@
 # https://www.hackerrank.com/challenges/two-characters/problem?isFullScreen=true
+#
+# Just check all possible combinations?
+
+import itertools
 
 
-def char2index(c):
-    return ord(c) - ord('a')
+def generate_twos(s):
+    return itertools.combinations(set(s), 2)
 
 
-num = 26
+def keep_chars(s, two_set):
+    return "".join(filter(lambda c: c in two_set, s))
 
-chars = [['' for i in range(num)] for j in range(num)]
-counts = [[0 for i in range(num)] for j in range(num)]
-# in python, not chars = [['']*num]*num
 
-n = int(raw_input())
-s = raw_input()
+def is_valid(s):
+    for i in range(1, len(s)):
+        if s[i] == s[i - 1]:
+            return False
+    return True
 
-for c in s:
-    i = char2index(c)
 
-    for row in range(26):
-        if not chars[row][i]:
-            chars[row][i] = c
-            counts[row][i] = 1
-        elif chars[row][i] == c or counts[row][i] == -1:
-            counts[row][i] = -1
-        else:
-            chars[row][i] = c
-            counts[row][i] += 1
-
-    for col in range(26):
-        if not chars[i][col]:
-            chars[i][col] = c
-            counts[i][col] = 1
-        elif chars[i][col] == c or counts[i][col] == -1:
-            counts[i][col] = -1  # stupid
-        else:
-            chars[i][col] = c
-            counts[i][col] += 1
-
-ans = max([max(row) for row in counts])
-# alternating
-print(ans if ans > 1 else 0)
+def alternate(s):
+    twos = generate_twos(s)
+    res = 0
+    for two in twos:
+        changed_s = keep_chars(s, two)
+        if is_valid(changed_s):
+            res = max(res, len(changed_s))
+    return res
