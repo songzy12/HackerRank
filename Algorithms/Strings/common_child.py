@@ -1,33 +1,26 @@
 # https://www.hackerrank.com/challenges/common-child/problem?isFullScreen=true
+#
+# This is actually the classical longest common subsequence problem:
+# https://en.wikipedia.org/wiki/Longest_common_subsequence
 
 
 def commonChild(s1, s2):
-    # dp = [[0 for i in range(len(s2)+1)] for j in range(len(s1)+1)]
-
-    if len(s1) < len(s2):  # make sure len(s2) is smaller
-        s1, s2 = s2, s1
-    dp = [[0 for i in range(len(s2) + 1)] for j in range(2)]
-    for i in range(len(s2) + 1):
-        dp[0][i] = dp[1][i] = 0
-    #for i in range(len(s2)+1):
-    #    dp[0][i] = 0
+    dp = [[0 for i in range(len(s2) + 1)] for j in range(len(s1) + 1)]
+    for i in range(len(s1) + 1):
+        dp[i][0] = 0
+    for j in range(len(s2) + 1):
+        dp[0][j] = 0
 
     for i in range(1, len(s1) + 1):
         for j in range(1, len(s2) + 1):
             if s1[i - 1] == s2[j - 1]:
-                # max is slow, use if else
-                dp[i % 2][j] = max([
-                    dp[i % 2][j - 1], dp[(i + 1) % 2][j],
-                    dp[(i + 1) % 2][j - 1] + 1
-                ])
+                dp[i][j] = 1 + dp[i - 1][j - 1]
             else:
-                dp[i % 2][j] = max(dp[i % 2][j - 1], dp[(i + 1) % 2][j])
-    return dp[len(s1) % 2][-1]  # not dp[-1][-1]
+                dp[i][j] = max(dp[i - 1][j], dp[i][j - 1])
+    return dp[len(s1)][len(s2)]
 
 
-s1 = raw_input().strip()
-s2 = raw_input().strip()
-result = commonChild(s1, s2)
-print(result)
-
-# no need to generate the whole dp array
+if __name__ == "__main__":
+    s1 = input()
+    s2 = input()
+    print(commonChild(s1, s2))
