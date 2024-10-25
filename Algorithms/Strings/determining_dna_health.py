@@ -10,20 +10,16 @@ class Node:
     3. dict_suffix: a pointer to the dict suffix Node, i.e.,
     """
 
-    # class memeber shared by all instances.
-    node_index = defaultdict(int)
-
-    def __init__(self, c):
+    def __init__(self, c, index):
         self.char = c
-        self.label = str(Node.node_index[self.char])
-        Node.node_index[self.char] += 1
+        self.index = set()
 
         # match
         self.child = {}
         self.parent = None
 
         self.in_dict = False
-        self.health = 0
+        self.health = {}
 
         # fail
         self.suffix = None
@@ -34,27 +30,27 @@ class Node:
         """Returns whether the current node is the head of trie."""
         return self.parent is None
 
-    def get_label(self):
-        return self.char + self.label
-
 
 def build_trie(genes, healths):
-    head = Node("")
+    head = Node("", -1)
+    index = 0
     for gene, health in zip(genes, healths):
-        insert_word(head, gene, health)
+        insert_word(head, gene, health, index)
+        index += 1
     insert_suffix_links(head)
     insert_dict_suffix_links(head)
     return head
 
 
-def insert_word(head, gene, health):
+def insert_word(head, gene, health, index):
     cur = head
     for c in gene:
         if c not in cur.child:
-            cur.child[c] = Node(c)
+            cur.child[c] = Node(c, -1)
             cur.child[c].parent = cur
         cur = cur.child[c]
-    cur.health += health
+    cur.index.add(index)
+    cur.health[index] = health
     cur.in_dict = True
 
 
@@ -131,14 +127,14 @@ def print_trie(trie):
 
 
 def print_node(node):
-    print(node.get_label())
-    print("child:", " ".join(node.child[c].get_label() for c in node.child))
-    print("suffix:", node.suffix.get_label() if node.suffix else None)
-    print("dict_suffix:", node.dict_suffix.get_label() if node.dict_suffix else None)
+    print(node.index)
+    print("child:", " ".join(node.child[c].index for c in node.child))
+    print("suffix:", node.suffix.index if node.suffix else None)
+    print("dict_suffix:", node.dict_suffix.index if node.dict_suffix else None)
     print()
 
 
-def search(trie, dna):
+def search(trie, dna, first, last):
     """Search the DNA on Trie, which was built upon a set of target Genes."""
     ans = 0
     cur_index = 0
@@ -149,7 +145,7 @@ def search(trie, dna):
             # match
             cur_index += 1
             cur_node = cur_node.child[cur_char]
-            ans += output(cur_node)
+            ans += output(cur_node, first, last)
             continue
         else:
             # fail to match
@@ -160,27 +156,23 @@ def search(trie, dna):
     return ans
 
 
-def output(node):
+def output(node, first, last):
     ans = 0
     while node:
-        ans += node.health
+        for index in node.index:
+            if first <= index <= last:
+                ans += node.health.get(index, 0)
         node = node.dict_suffix
     return ans
-
-
-def compute_dna_health(dna, genes, healths):
-    # print(dna)
-    trie = build_trie(genes, healths)
-    # print_trie(trie)
-    return search(trie, dna)
 
 
 if __name__ == "__main__":
     n = int(input().strip())
     genes = input().rstrip().split()
-    health = list(map(int, input().rstrip().split()))
+    healths = list(map(int, input().rstrip().split()))
     s = int(input().strip())
 
+    trie = build_trie(genes, healths)
     healths = []
     for s_itr in range(s):
         first_multiple_input = input().rstrip().split()
@@ -188,7 +180,5 @@ if __name__ == "__main__":
         last = int(first_multiple_input[1])
         d = first_multiple_input[2]
 
-        healths.append(
-            compute_dna_health(d, genes[first : last + 1], health[first : last + 1])
-        )
+        healths.append(search(trie, d, first, last))
     print(min(healths), max(healths))
