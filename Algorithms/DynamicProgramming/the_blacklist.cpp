@@ -1,3 +1,5 @@
+// https://www.hackerrank.com/challenges/the-blacklist/problem?isFullScreen=true
+
 /* The gangster can use any number of these mercenaries. But he has to honor one condition set by them:
  * they have to be assigned in such a way that they eliminate a consecutive group of gangsters in the list
  */

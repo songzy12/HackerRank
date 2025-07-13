@@ -1,3 +1,5 @@
+// https://www.hackerrank.com/challenges/string-reduction/problem
+
 #include <map>
 #include <set>
 #include <list>
