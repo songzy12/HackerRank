@@ -19,6 +19,13 @@
       * Johnson's Algorithm
       * Floyd–Warshall Algorithm
     * Minimum Spanning Tree
+* Data Structure
+  * Tree
+    * Fenwick Tree
+    * Interval Tree
+    * Range Tree
+    * Segment Tree
+    * Union Tree
 * Mathematics
   * Number Theory
     * Pascal's Rule
@@ -27,3 +34,15 @@
     * Euler's Theorem
     * Lucas's Theorem
     * Kummer's Theorem
+* Challenges
+  * Strings 
+    * [Determining DNA Health](Challenges/determining_dna_health.md)
+  * Sorting
+  * Search
+  * Graph Theory
+  * Greedy
+  * Dynamic Programming
+  * Constructive Algorithms
+  * Recursion
+  * Game Theory
+  * NP Complete
