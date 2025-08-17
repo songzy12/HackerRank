@@ -1,6 +1,17 @@
 # https://www.hackerrank.com/challenges/determining-dna-health/problem?isFullScreen=false
+#
+# Input:
+#   1. gene_i (string) with health_i (int)
+#   2. dna_i (string) with start_i (index), end_i (index)
+# Output:
+#   DNA with max and min health
+#
+# Method:
+# 1. Multiple string searching: Aho–Corasick algorithm
+# 2. Range query: Prefix sum
 
-from collections import defaultdict
+
+from bisect import bisect_left, bisect_right
 
 
 class Node:
@@ -10,21 +21,22 @@ class Node:
     3. dict_suffix: a pointer to the dict suffix Node, i.e.,
     """
 
-    def __init__(self, c, index):
+    def __init__(self, c):
         self.char = c
-        self.index = set()
 
         # match
         self.child = {}
         self.parent = None
 
         self.in_dict = False
-        self.health = {}
 
         # fail
         self.suffix = None
         # output
         self.dict_suffix = None
+
+        self.index = []
+        self.health_prefix_sum = [0]
 
     def is_head(self):
         """Returns whether the current node is the head of trie."""
@@ -32,7 +44,7 @@ class Node:
 
 
 def build_trie(genes, healths):
-    head = Node("", -1)
+    head = Node("")
     index = 0
     for gene, health in zip(genes, healths):
         insert_word(head, gene, health, index)
@@ -46,11 +58,11 @@ def insert_word(head, gene, health, index):
     cur = head
     for c in gene:
         if c not in cur.child:
-            cur.child[c] = Node(c, -1)
+            cur.child[c] = Node(c)
             cur.child[c].parent = cur
         cur = cur.child[c]
-    cur.index.add(index)
-    cur.health[index] = health
+    cur.index.append(index)
+    cur.health_prefix_sum.append(cur.health_prefix_sum[-1] + health)
     cur.in_dict = True
 
 
@@ -156,12 +168,15 @@ def search(trie, dna, first, last):
     return ans
 
 
+def compute_health_sum_interval(index, prefix_sum, first, last):
+    return prefix_sum[bisect_right(index, last)]-prefix_sum[bisect_left(index, first)]
+
+
 def output(node, first, last):
     ans = 0
     while node:
-        for index in node.index:
-            if first <= index <= last:
-                ans += node.health.get(index, 0)
+        ans += compute_health_sum_interval(node.index,
+                                           node.health_prefix_sum, first, last)
         node = node.dict_suffix
     return ans
 

@@ -2,7 +2,7 @@ https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm
 
 # Aho–Corasick algorithm
 
-Informally, the algorithm constructs a finite-state machine that resembles a trie with additional links between the various internal nodes. These extra internal links allow fast transitions between failed string matches (e.g. a search for cart in a trie that does not contain cart, but contains art, and thus would fail at the node prefixed by car), to other branches of the trie that share a common suffix (e.g., in the previous case, a branch for attribute might be the best lateral transition). This allows the automaton to transition between string matches without the need for backtracking.
+Informally, the algorithm constructs a finite-state machine that resembles a trie with additional links between the various internal nodes. These extra internal links allow fast transitions between failed string matches (e.g. a search for `cart` in a trie that does not contain `cart`, but contains `art`, and thus would fail at the node prefixed by `car`), to other branches of the trie that share a common suffix (e.g., in the previous case, a branch for attribute might be the best lateral transition). This allows the automaton to transition between string matches without the need for backtracking.
 
 ## Example
 

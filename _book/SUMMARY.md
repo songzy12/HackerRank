@@ -36,7 +36,7 @@
     * Kummer's Theorem
 * Challenges
   * Strings 
-    * [Determining DNA Health](Challenges/determining_dna_health.md)
+    * [Determining DNA Health](Challenges/Strings/determining_dna_health.md)
   * Sorting
   * Search
   * Graph Theory
