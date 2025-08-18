@@ -12,6 +12,8 @@
 
 ## Range Sum Query
 
+### Brute Force
+
 ### Prefix Sum Array
 
 ### Fenwick Tree
@@ -26,3 +28,4 @@
 2. Hash + Prefix Sum: https://www.hackerrank.com/challenges/determining-dna-health/forum/comments/545570
 3. AC + Persistent Segment Tree: https://www.hackerrank.com/challenges/determining-dna-health/forum/comments/532519
 4. Compressed trie + Segment tree: https://www.hackerrank.com/challenges/determining-dna-health/forum/comments/1325327
+5. https://www.hackerrank.com/challenges/determining-dna-health/leaderboard?filter=python3&filter_on=language&page=1

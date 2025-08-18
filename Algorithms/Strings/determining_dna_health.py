@@ -7,11 +7,12 @@
 #   DNA with max and min health
 #
 # Method:
-# 1. Multiple string searching: Aho–Corasick algorithm
+# 1. Multiple string searching: Aho-Corasick algorithm
 # 2. Range query: Prefix sum
 
 
 from bisect import bisect_left, bisect_right
+from collections import deque
 
 
 class Node:
@@ -68,10 +69,11 @@ def insert_word(head, gene, health, index):
 
 def insert_suffix_links(trie):
     """The suffix link of a node points to the longest suffix in the trie."""
-    queue = [trie]
+    queue = deque()
+    queue.append(trie)
     visited = {trie}
     while len(queue) != 0:
-        node = queue.pop(0)
+        node = queue.popleft()
         for k in node.child:
             v = node.child[k]
             if v not in visited:
@@ -97,7 +99,7 @@ def _insert_suffix_link(node):
             break
         parent = parent.suffix
     else:
-        # Now parrent is head
+        # Now parent is head
         if node.char in parent.child:
             node.suffix = parent.child[node.char]
         else:
@@ -105,10 +107,11 @@ def _insert_suffix_link(node):
 
 
 def insert_dict_suffix_links(trie):
-    queue = [trie]
+    queue = deque()
+    queue.append(trie)
     visited = {trie}
     while len(queue) != 0:
-        node = queue.pop(0)
+        node = queue.popleft()
         for k in node.child:
             v = node.child[k]
             if v not in visited:
