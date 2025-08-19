@@ -39,10 +39,6 @@ class Node:
         self.index = None
         self.health_prefix_sum = None
 
-    def is_head(self):
-        """Returns whether the current node is the head of trie."""
-        return self.parent is None
-
 
 def build_trie(genes, healths):
     head = Node("")
@@ -82,7 +78,7 @@ def insert_suffix_links(trie):
             if v not in visited:
                 queue.append(v)
                 visited.add(v)
-        if node.is_head():
+        if node.parent == None:
             continue
         _insert_suffix_link(node)
 
@@ -93,10 +89,10 @@ def _insert_suffix_link(node):
     # Else, check node.parent.suffix.suffix, until head.
     #   If node.char not in head.child, node.suffix = head
     parent = node.parent
-    if parent.is_head():
+    if parent.parent == None:
         node.suffix = parent
         return
-    while not parent.is_head():
+    while parent.parent != None:
         if node.char in parent.suffix.child:
             node.suffix = parent.suffix.child[node.char]
             break
@@ -107,49 +103,6 @@ def _insert_suffix_link(node):
             node.suffix = parent.child[node.char]
         else:
             node.suffix = parent
-
-
-def insert_dict_suffix_links(trie):
-    queue = deque()
-    queue.append(trie)
-    visited = {trie}
-    while len(queue) != 0:
-        node = queue.popleft()
-        for k in node.child:
-            v = node.child[k]
-            if v not in visited:
-                queue.append(v)
-                visited.add(v)
-        _insert_dict_suffix_link(node)
-
-
-def _insert_dict_suffix_link(node):
-    suffix = node.suffix
-    while suffix and not suffix.is_head() and not suffix.in_dict:
-        suffix = suffix.suffix
-    if suffix and not suffix.is_head():
-        node.dict_suffix = suffix
-
-
-def print_trie(trie):
-    queue = [trie]
-    visited = {trie}
-    while len(queue) != 0:
-        node = queue.pop(0)
-        for k in node.child:
-            v = node.child[k]
-            if v not in visited:
-                queue.append(v)
-                visited.add(v)
-        print_node(node)
-
-
-def print_node(node):
-    print(node.index)
-    print("child:", " ".join(node.child[c].index for c in node.child))
-    print("suffix:", node.suffix.index if node.suffix else None)
-    print("dict_suffix:", node.dict_suffix.index if node.dict_suffix else None)
-    print()
 
 
 def search(trie, dna, first, last):
@@ -167,7 +120,7 @@ def search(trie, dna, first, last):
             continue
         else:
             # fail to match
-            if not cur_node.is_head():
+            if cur_node.parent != None:
                 cur_node = cur_node.suffix
             else:
                 cur_index += 1
