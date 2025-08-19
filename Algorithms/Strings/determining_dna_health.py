@@ -36,8 +36,8 @@ class Node:
         # output
         self.dict_suffix = None
 
-        self.index = []
-        self.health_prefix_sum = [0]
+        self.index = None
+        self.health_prefix_sum = None
 
     def is_head(self):
         """Returns whether the current node is the head of trie."""
@@ -62,6 +62,9 @@ def insert_word(head, gene, health, index):
             cur.child[c] = Node(c)
             cur.child[c].parent = cur
         cur = cur.child[c]
+    if cur.index == None:
+        cur.index = []
+        cur.health_prefix_sum = [0]
     cur.index.append(index)
     cur.health_prefix_sum.append(cur.health_prefix_sum[-1] + health)
     cur.in_dict = True
@@ -178,7 +181,7 @@ def compute_health_sum_interval(index, prefix_sum, first, last):
 def output(node, first, last):
     ans = 0
     while node:
-        if len(node.index):
+        if node.index != None:
             ans += compute_health_sum_interval(node.index,
                                                node.health_prefix_sum, first, last)
         node = node.suffix
