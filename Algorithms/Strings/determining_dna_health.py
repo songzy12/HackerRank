@@ -51,7 +51,7 @@ def build_trie(genes, healths):
         insert_word(head, gene, health, index)
         index += 1
     insert_suffix_links(head)
-    insert_dict_suffix_links(head)
+    # insert_dict_suffix_links(head)
     return head
 
 
@@ -178,9 +178,10 @@ def compute_health_sum_interval(index, prefix_sum, first, last):
 def output(node, first, last):
     ans = 0
     while node:
-        ans += compute_health_sum_interval(node.index,
-                                           node.health_prefix_sum, first, last)
-        node = node.dict_suffix
+        if len(node.index):
+            ans += compute_health_sum_interval(node.index,
+                                               node.health_prefix_sum, first, last)
+        node = node.suffix
     return ans
 
 
