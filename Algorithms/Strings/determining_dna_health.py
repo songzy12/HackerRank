@@ -29,25 +29,20 @@ class Node:
         self.child = {}
         self.parent = None
 
-        self.in_dict = False
-
         # fail
         self.suffix = None
-        # output
-        self.dict_suffix = None
 
-        self.index = None
+        self.indices = None
         self.health_prefix_sum = None
 
 
-def build_trie(genes, healths):
+def build_aho_corasick_automaton(genes, healths):
     head = Node("")
     index = 0
     for gene, health in zip(genes, healths):
         insert_word(head, gene, health, index)
         index += 1
     insert_suffix_links(head)
-    # insert_dict_suffix_links(head)
     return head
 
 
@@ -58,26 +53,23 @@ def insert_word(head, gene, health, index):
             cur.child[c] = Node(c)
             cur.child[c].parent = cur
         cur = cur.child[c]
-    if cur.index == None:
-        cur.index = []
+    if cur.indices == None:
+        cur.indices = []
         cur.health_prefix_sum = [0]
-    cur.index.append(index)
+    cur.indices.append(index)
     cur.health_prefix_sum.append(cur.health_prefix_sum[-1] + health)
-    cur.in_dict = True
 
 
 def insert_suffix_links(trie):
     """The suffix link of a node points to the longest suffix in the trie."""
     queue = deque()
     queue.append(trie)
-    visited = {trie}
+
     while len(queue) != 0:
         node = queue.popleft()
         for k in node.child:
             v = node.child[k]
-            if v not in visited:
-                queue.append(v)
-                visited.add(v)
+            queue.append(v)
         if node.parent == None:
             continue
         _insert_suffix_link(node)
@@ -105,7 +97,7 @@ def _insert_suffix_link(node):
             node.suffix = parent
 
 
-def search(trie, dna, first, last):
+def calculate_dna_health(trie, dna, first, last):
     """Search the DNA on Trie, which was built upon a set of target Genes."""
     ans = 0
     cur_index = 0
@@ -127,16 +119,16 @@ def search(trie, dna, first, last):
     return ans
 
 
-def compute_health_sum_interval(index, prefix_sum, first, last):
-    return prefix_sum[bisect_right(index, last)]-prefix_sum[bisect_left(index, first)]
+def compute_range_sum(indices, prefix_sum, first, last):
+    return prefix_sum[bisect_right(indices, last)]-prefix_sum[bisect_left(indices, first)]
 
 
 def output(node, first, last):
     ans = 0
     while node:
-        if node.index != None:
-            ans += compute_health_sum_interval(node.index,
-                                               node.health_prefix_sum, first, last)
+        if node.indices != None:
+            ans += compute_range_sum(node.indices,
+                                     node.health_prefix_sum, first, last)
         node = node.suffix
     return ans
 
@@ -147,7 +139,7 @@ if __name__ == "__main__":
     healths = list(map(int, input().rstrip().split()))
     s = int(input().strip())
 
-    trie = build_trie(genes, healths)
+    automaton = build_aho_corasick_automaton(genes, healths)
     healths = []
     for s_itr in range(s):
         first_multiple_input = input().rstrip().split()
@@ -155,5 +147,5 @@ if __name__ == "__main__":
         last = int(first_multiple_input[1])
         d = first_multiple_input[2]
 
-        healths.append(search(trie, d, first, last))
+        healths.append(calculate_dna_health(automaton, d, first, last))
     print(min(healths), max(healths))
