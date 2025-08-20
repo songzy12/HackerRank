@@ -32,16 +32,15 @@ class Node:
         # fail
         self.suffix = None
 
+        # customized fields for current problem
         self.indices = None
-        self.health_prefix_sum = None
+        self.prefix_sum = None
 
 
 def build_aho_corasick_automaton(genes, healths):
     head = Node("")
-    index = 0
-    for gene, health in zip(genes, healths):
+    for index, (gene, health) in enumerate(zip(genes, healths)):
         insert_word(head, gene, health, index)
-        index += 1
     insert_suffix_links(head)
     return head
 
@@ -55,9 +54,9 @@ def insert_word(head, gene, health, index):
         cur = cur.child[c]
     if cur.indices == None:
         cur.indices = []
-        cur.health_prefix_sum = [0]
+        cur.prefix_sum = [0]
     cur.indices.append(index)
-    cur.health_prefix_sum.append(cur.health_prefix_sum[-1] + health)
+    cur.prefix_sum.append(cur.prefix_sum[-1] + health)
 
 
 def insert_suffix_links(trie):
@@ -119,7 +118,9 @@ def calculate_dna_health(trie, dna, first, last):
     return ans
 
 
-def compute_range_sum(indices, prefix_sum, first, last):
+def compute_range_sum(node, first, last):
+    indices = node.indices
+    prefix_sum = node.prefix_sum
     return prefix_sum[bisect_right(indices, last)]-prefix_sum[bisect_left(indices, first)]
 
 
@@ -127,8 +128,7 @@ def output(node, first, last):
     ans = 0
     while node:
         if node.indices != None:
-            ans += compute_range_sum(node.indices,
-                                     node.health_prefix_sum, first, last)
+            ans += compute_range_sum(node, first, last)
         node = node.suffix
     return ans
 
