@@ -692,6 +692,136 @@ Time for test case 7 reduced to 5.183 seconds.
         1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:841(create_module)
 ```
 
+### Optimize how to build the suffix links
+
+This reduced the time cost of test case 7 to 4.264 seconds.
+
+```
+0 7353994
+         5635238 function calls (5635232 primitive calls) in 4.264 seconds
+
+   Ordered by: internal time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    1.702    1.702    1.800    1.800 determining_dna_health.py:62(insert_suffix_links)
+   100000    1.188    0.000    2.275    0.000 determining_dna_health.py:48(insert_word)
+  1261351    1.080    0.000    1.080    0.000 determining_dna_health.py:25(__init__)
+    99919    0.092    0.000    0.092    0.000 determining_dna_health.py:108(output)
+     1000    0.061    0.000    0.157    0.000 determining_dna_health.py:80(calculate_dna_health)
+  1261351    0.035    0.000    0.035    0.000 {method 'items' of 'dict' objects}
+  1261350    0.032    0.000    0.032    0.000 {method 'append' of 'collections.deque' objects}
+  1261350    0.031    0.000    0.031    0.000 {method 'popleft' of 'collections.deque' objects}
+        1    0.012    0.012    4.087    4.087 determining_dna_health.py:40(build_aho_corasick_automaton)
+        1    0.008    0.008    4.264    4.264 determining_dna_health.py:14(<module>)
+     1002    0.006    0.000    0.006    0.000 {method 'split' of 'str' objects}
+   201000    0.006    0.000    0.006    0.000 {method 'append' of 'list' objects}
+   183359    0.004    0.000    0.004    0.000 {built-in method builtins.len}
+     1004    0.004    0.000    0.004    0.000 {built-in method builtins.input}
+      357    0.000    0.000    0.000    0.000 {built-in method _codecs.utf_8_decode}
+        1    0.000    0.000    0.000    0.000 {built-in method _imp.create_dynamic}
+      357    0.000    0.000    0.001    0.000 codecs.py:319(decode)
+     1068    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 {built-in method posix.getcwd}
+      357    0.000    0.000    0.000    0.000 codecs.py:331(getstate)
+       10    0.000    0.000    0.000    0.000 {built-in method posix.stat}
+        7    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1505(find_spec)
+        1    0.000    0.000    0.000    0.000 {built-in method io.open_code}
+       32    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:121(_path_join)
+       32    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:123(<listcomp>)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1374(_get_spec)
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.__build_class__}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:901(_find_spec)
+        1    0.000    0.000    0.000    0.000 {built-in method marshal.loads}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:361(cache_from_source)
+      2/1    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:1002(_find_and_load)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:486(_init_module_attrs)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:166(_get_module_lock)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:916(get_code)
+       36    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:231(_verbose_message)
+       12    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+      2/1    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:659(_load_unlocked)
+        1    0.000    0.000    0.000    0.000 determining_dna_health.py:102(compute_range_sum)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:87(acquire)
+        1    0.000    0.000    0.000    0.000 bisect.py:1(<module>)
+       34    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1036(get_data)
+        1    0.000    0.000    0.000    0.000 {method 'read' of '_io.BufferedReader' objects}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:696(spec_from_file_location)
+        9    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1337(_path_importer_cache)
+      2/1    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap>:967(_find_and_load_unlocked)
+       10    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:135(_path_stat)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:112(release)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:558(module_from_spec)
+      3/1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:220(_call_with_frames_removed)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:127(_path_split)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:491(_get_cached)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:58(__init__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:645(_compile_bytecode)
+       12    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+        7    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:64(_relax_case)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:560(_classify_pyc)
+        3    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:79(_unpack_uint32)
+        1    0.000    0.000    0.000    0.000 {method '__exit__' of '_io._IOBase' objects}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1171(create_module)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1500(_get_spec)
+       13    0.000    0.000    0.000    0.000 {method 'rpartition' of 'str' objects}
+        3    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:385(cached)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:878(__exit__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1406(find_spec)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:156(__enter__)
+      2/1    0.000    0.000    4.264    4.264 {built-in method builtins.exec}
+        1    0.000    0.000    0.001    0.001 <frozen importlib._bootstrap_external>:844(exec_module)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:185(cb)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:129(<genexpr>)
+        3    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:175(_path_isabs)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:874(__enter__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:351(__init__)
+       12    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:736(find_spec)
+       10    0.000    0.000    0.000    0.000 {built-in method _imp.acquire_lock}
+        2    0.000    0.000    0.000    0.000 {built-in method _imp.is_builtin}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:811(find_spec)
+       10    0.000    0.000    0.000    0.000 {built-in method _imp.release_lock}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1179(exec_module)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:145(_path_is_mode_type)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:398(parent)
+        3    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:160(__exit__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1033(_handle_fromlist)
+        3    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        4    0.000    0.000    0.000    0.000 {built-in method _thread.allocate_lock}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:154(_path_isfile)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:152(__init__)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:523(_check_name_wrapper)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:593(_validate_timestamp_pyc)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:35(_new_module)
+        4    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.lock' objects}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1155(__init__)
+        2    0.000    0.000    0.000    0.000 {method 'strip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1077(path_stats)
+        2    0.000    0.000    0.000    0.000 {built-in method _imp.is_frozen}
+        3    0.000    0.000    0.000    0.000 {built-in method from_bytes}
+        4    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+        4    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+        1    0.000    0.000    0.000    0.000 determining_dna_health.py:18(Node)
+        1    0.000    0.000    0.000    0.000 {built-in method _bisect.bisect_right}
+        2    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method _imp.exec_dynamic}
+        2    0.000    0.000    0.000    0.000 {method 'lstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        4    0.000    0.000    0.000    0.000 {built-in method posix.fspath}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1006(__init__)
+        2    0.000    0.000    0.000    0.000 {method 'pop' of 'dict' objects}
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:406(has_location)
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1031(get_filename)
+        1    0.000    0.000    0.000    0.000 {built-in method _bisect.bisect_left}
+        1    0.000    0.000    0.000    0.000 {built-in method _imp._fix_co_filename}
+        1    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:841(create_module)
+```
+
 ## Reference
 
 1. AC + Fenwick Tree: https://www.hackerrank.com/challenges/determining-dna-health/editorial

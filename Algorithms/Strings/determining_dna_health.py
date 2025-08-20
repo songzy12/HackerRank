@@ -62,38 +62,19 @@ def insert_word(head, gene, health, index):
 def insert_suffix_links(trie):
     """The suffix link of a node points to the longest suffix in the trie."""
     queue = deque()
-    queue.append(trie)
+    for k, v in trie.child.items():
+        v.suffix = trie
+        queue.append(v)
 
-    while len(queue) != 0:
+    while queue:
         node = queue.popleft()
-        for k in node.child:
-            v = node.child[k]
+        for k, v in node.child.items():
             queue.append(v)
-        if node.parent == None:
-            continue
-        _insert_suffix_link(node)
 
-
-def _insert_suffix_link(node):
-    # If node.char in node.parent.suffix.child,
-    #   then node.suffix = node.parent.suffix.child[node.char]
-    # Else, check node.parent.suffix.suffix, until head.
-    #   If node.char not in head.child, node.suffix = head
-    parent = node.parent
-    if parent.parent == None:
-        node.suffix = parent
-        return
-    while parent.parent != None:
-        if node.char in parent.suffix.child:
-            node.suffix = parent.suffix.child[node.char]
-            break
-        parent = parent.suffix
-    else:
-        # Now parent is head
-        if node.char in parent.child:
-            node.suffix = parent.child[node.char]
-        else:
-            node.suffix = parent
+            parent_suffix = node.suffix
+            while parent_suffix != None and k not in parent_suffix.child:
+                parent_suffix = parent_suffix.suffix
+            v.suffix = trie if parent_suffix is None else parent_suffix.child[k]
 
 
 def calculate_dna_health(trie, dna, first, last):
