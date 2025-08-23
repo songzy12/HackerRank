@@ -1,24 +1,34 @@
 <https://www.hackerrank.com/challenges/determining-dna-health/problem?isFullScreen=false>
 
-## Multi String Matching
+TL;DR: The solution here scored 47.7/50, and got TLE on test case 7/8/9.
 
-### Brute Force
+## Multi String Matching
 
 ### KMP
 
+<https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm>
+
 ### Trie
 
-### AC
+<https://en.wikipedia.org/wiki/Trie>
+
+### Aho-Corasick
+
+<https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm>
 
 ## Range Sum Query
 
-### Brute Force
+### Prefix Sum
 
-### Prefix Sum Array
+<https://en.wikipedia.org/wiki/Prefix_sum>
 
 ### Fenwick Tree
 
+<https://en.wikipedia.org/wiki/Fenwick_tree>
+
 ### Segment Tree
+
+<https://en.wikipedia.org/wiki/Segment_tree>
 
 ## Solution: AC + Prefix Sum
 
