@@ -1,4 +1,4 @@
-#!/bin/python3
+# https://www.hackerrank.com/challenges/grid-challenge/problem
 
 import os
 
