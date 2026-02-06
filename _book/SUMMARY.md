@@ -18,9 +18,11 @@
       * Dijkstra's Algorithm
       * Johnson's Algorithm
       * Floyd–Warshall Algorithm
-    * Minimum Spanning Tree
-* Data Structure
-  * Tree
+    * [Minimum Spanning Tree](https://en.wikipedia.org/wiki/Minimum_spanning_tree)
+  * [Game Theory](Algorithms/GameTheory/README.md)
+  * [Combinatorial Algorithms](Algorithms/CombinatorialAlgorithms/README.md)
+* [Data Structure](DataStructures/README.md)
+  * [Tree](DataStructures/Tree/README.md)
     * Fenwick Tree
     * Interval Tree
     * Range Tree

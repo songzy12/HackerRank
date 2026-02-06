@@ -312,7 +312,8 @@ This can reduce the time cost from 6.576 seconds to 6.057 seconds
 * `__init__`: 1.730 -> 1.037
 * `insert_word`: 1.075 -> 1.324
 
-```0 7353994
+```
+0 7353994
          13001200 function calls (13001194 primitive calls) in 6.057 seconds
 
    Ordered by: internal time
