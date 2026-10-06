@@ -1,56 +1,66 @@
-import sys
-
-fin = open('in.txt', 'r')
-fout = open('out.txt', 'w')
-stdin, stdout = sys.stdin, sys.stdout
-sys.stdin, sys.stdout = fin, fout
-
-M, N, R = map(lambda x: int(x), input().split())
-A = [[] for row in range(M)]
-for row in range(M):
-    A[row] = list(map(lambda x: int(x), input().split()))
+# https://www.hackerrank.com/challenges/matrix-rotation-algo/problem?isFullScreen=false
 
 
-def rotate(i, j, R, l, r, t, b):
-    if i == t and j > l:
-        seg = j - l
-        return (i, j - R) if R <= seg else rotate(t, l, R - seg, l, r, t, b)
-    elif i == b and j < r:
-        seg = r - j
-        return (i, j + R) if R <= seg else rotate(b, r, R - seg, l, r, t, b)
-    elif j == l and i < b:
-        seg = b - i
-        return (i + R, j) if R <= seg else rotate(b, l, R - seg, l, r, t, b)
-    elif j == r and i > t:
-        seg = i - t
-        return (i - R, j) if R <= seg else rotate(t, r, R - seg, l, r, t, b)
+def getNext(head, tail):
+    return [head[0] + 1, head[1] + 1], [tail[0] - 1, tail[1] - 1]
 
 
-m = {}
-inv = {}
-for i in range(M):
-    for j in range(N):
-        layer = min(i, j, M - 1 - i, N - 1 - j)
-        l, r, t, b = layer, N - 1 - layer, layer, M - 1 - layer
-        total = 2 * ((M - 2 * layer) + (N - 2 * layer)) - 4
-        # print('(%d, %d), (%d, %d, %d, %d) %d %d' % (i, j, l, r, t, b, layer, total))
-        m[(i, j)] = rotate(i, j, R % total, l, r, t, b)
-# B = [[0 for j in range(N)] for i in range(M)]
-# print(len(m), m)
-for i in range(M):
-    for j in range(N):
-        inv[m[(i, j)]] = (i, j)
-        # print(m[(i,j)], i0, j0)
-        # B[i][j] = A[i0][j0]
-# print(m)
-# print(inv)
-for i in range(M):
-    for j in range(N):
-        i0, j0 = inv[(i, j)]
-        print(A[i0][j0], end=" ")
-        pass
-    print()
+def matrixRotation(matrix, R):
+    rotated_matrix = [row[:] for row in matrix]
 
-fout.close()
-fin.close()
-sys.stdin, sys.stdout = stdin, stdout
+    head = [0, 0]
+    tail = [len(matrix) - 1, len(matrix[0]) - 1]
+    while head[0] < tail[0] and head[1] < tail[1]:
+        matrixRotationLayer(matrix, R, head, tail, rotated_matrix)
+        head, tail = getNext(head, tail)
+
+    return rotated_matrix
+
+
+def matrixRotationLayer(matrix, R, head, tail, rotated_matrix):
+    r1, c1, r2, c2 = head[0], head[1], tail[0], tail[1]
+
+    original_index = []
+    for c in range(c1, c2):
+        original_index.append([r1, c])
+    for r in range(r1, r2):
+        original_index.append([r, c2])
+    for c in range(c2, c1, -1):
+        original_index.append([r2, c])
+    for r in range(r2, r1, -1):
+        original_index.append([r, c1])
+
+    rotated_index = (
+        original_index[R % len(original_index) :]
+        + original_index[: R % len(original_index)]
+    )
+
+    index_map = dict(
+        zip([tuple(x) for x in original_index], [tuple(x) for x in rotated_index])
+    )
+
+    # print("head:", head, " tail:", tail)
+    # print("original_index:", original_index)
+    # print("rotated_index:", rotated_index)
+    # print()
+
+    for (i, j), (ni, nj) in index_map.items():
+        rotated_matrix[i][j] = matrix[ni][nj]
+
+
+def printMatrix(matrix):
+    for row in matrix:
+        print(" ".join(map(str, row)))
+
+
+if __name__ == "__main__":
+    first_multiple_input = input().rstrip().split()
+    m = int(first_multiple_input[0])
+    n = int(first_multiple_input[1])
+    r = int(first_multiple_input[2])
+    matrix = []
+    for _ in range(m):
+        matrix.append(list(map(int, input().rstrip().split())))
+
+    rotated_matrix = matrixRotation(matrix, r)
+    printMatrix(rotated_matrix)
